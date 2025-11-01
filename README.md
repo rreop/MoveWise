@@ -22,7 +22,7 @@ Clone the repository and start the app locally:
 
 ```bash
 git clone https://github.com/rreop/MoveWise.git
-cd where-should-i-live
+cd MoveWise/where-should-i-live
 npm install
 npm run dev
 ```
