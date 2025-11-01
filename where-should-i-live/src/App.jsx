@@ -63,7 +63,6 @@ function createQuizQuestion(label, question_minimum, question_maximum) {
   const useQuizQuestion = () => {
     const [sliderValue, setSliderValue] = useState((question_minimum + question_maximum) / 2);
     const [importance, setImportance] = useState("Important");
-    // TODO: fix this...
     var importanceValue = 1;
     if (importance === "Least Important") importanceValue = 0.2;
     else if (importance === "Somewhat Important") importanceValue = 0.4;
@@ -102,6 +101,7 @@ function App() {
   const questionStates = questionHooks.map(hook => hook());
 
   // Score cities based on user preferences
+  // TODO: Rewrite this to allow for easier question addition
   const scoredCities = cities.map(city => {
     const tempDiff = Math.abs(city.average_temperature - questionStates[0].sliderValue);
     const polDiff = Math.abs(city.political_lean - questionStates[1].sliderValue);
@@ -116,28 +116,13 @@ function App() {
   return (
     <>
       <h1 className="main-header">
-        Where should I live?
+        Where Should I Live?
       </h1>
 
       {/* Questions */}
       {questionStates.map((question, index) => (
         <div key={index}>{question.render()}</div>
       ))}
-
-      {/* Debugging */}
-      <h1 className="main-header" style={{ marginTop: '10rem' }}>
-        {questionStates[0].sliderValue}
-        {"-"}
-        {questionStates[0].importanceValue}
-        {"-"}
-        {Math.floor(questionStates[0].sliderValue * questionStates[0].importanceValue)}
-        {"..........."}
-        {questionStates[1].sliderValue}
-        {"-"}
-        {questionStates[1].importanceValue}
-        {"-"}
-        {Math.floor(questionStates[1].sliderValue * questionStates[1].importanceValue)}
-      </h1>
 
 
       <h2>City List</h2>
